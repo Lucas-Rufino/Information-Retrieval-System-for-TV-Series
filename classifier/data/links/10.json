@@ -1,0 +1,22 @@
+[
+	["http://www.metacritic.com/tv/legion", true],
+	["http://www.metacritic.com/tv/the-crown", true],
+	["http://www.metacritic.com/tv/atlanta", true],
+	["http://www.metacritic.com/tv/krypton", true],
+	["http://www.metacritic.com/tv/this-close", true],
+	["http://www.metacritic.com/tv/hard-sun", true],
+	["http://www.metacritic.com/tv/lost-in-space-2018", true],
+	["http://www.metacritic.com/tv/the-rain", true],
+	["http://www.metacritic.com/tv/mcmafia", true],
+	["http://www.metacritic.com/tv/our-cartoon-president", true],
+	["http://www.metacritic.com", false],
+	["http://www.metacritic.com/movie", false],
+	["http://www.metacritic.com/movie/beast", false],
+	["http://www.metacritic.com/movie/avengers-infinity-war", false],
+	["http://www.metacritic.com/game", false],
+	["http://www.metacritic.com/game/playstation-4/shadow-of-the-colossus", false],
+	["http://www.metacritic.com/feature", false],
+	["http://www.metacritic.com/tv", false],
+	["http://www.metacritic.com/music", false],
+	["http://www.metacritic.com/music/dirty-computer/janelle-monae", false]
+]
