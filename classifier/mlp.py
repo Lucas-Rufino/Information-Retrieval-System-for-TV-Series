@@ -17,12 +17,12 @@ def sigmoid(x):
     """
     return 1/(1+np.exp(-x))
 
-with open("dataset/edited/trainX.json") as fl:
+with open("data/edited/trainX.json") as fl:
     trainX = json.load(fl)
     trainX = map(lambda x: pln.vectorize(x) + [1], trainX)
     
 
-with open("dataset/edited/trainY.json") as fl:
+with open("data/edited/trainY.json") as fl:
     trainY = json.load(fl)
     trainY = map(lambda x: [int(x)], trainY)
 
