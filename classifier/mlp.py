@@ -1,17 +1,20 @@
-from data import pln
+from sklearn.model_selection import StratifiedKFold
+from classifier.test import validate
+from classifier.data import pln
 import numpy as np
 import json
+import time
 
 _syn0 = None
 _syn1 = None
 
 with open("classifier/data/edited/trainX.json") as fl:
     _trainX = json.load(fl)
-    _trainX = map(lambda x: pln.vectorize(x) + [1], _trainX)
+    _trainX = map(lambda x: pln.vectorize(x), _trainX)
 
 with open("classifier/data/edited/trainY.json") as fl:
     _trainY = json.load(fl)
-    _trainY = map(lambda x: [int(x)], _trainY)
+    _trainY = map(lambda x: int(x), _trainY)
 
 def dSigmoid(x):
     """
@@ -31,8 +34,8 @@ def sigmoid(x):
 def fit(trainX=_trainX, trainY=_trainY, learnT=10000):
     global _syn0, _syn1
     # TRAINING EXAMPLES
-    X = np.array(trainX)    # problem attribuites + BIAS
-    Y = np.array(trainY)    # Classificator attribuite
+    X = np.array(map(lambda x: x + [1], trainX))  # problem attribuites + BIAS
+    Y = np.array(map(lambda x: [x], trainY))      # Classificator attribuite
     
     # NEURAL NETWORK INITIAL SETUP
     numAtt = 101            # Number of problem attribuites + BIAS
@@ -45,7 +48,7 @@ def fit(trainX=_trainX, trainY=_trainY, learnT=10000):
     _syn1 = 2*np.random.random((numMid, numOut)) - 1
     
     # TRAINING PROCESS
-    for j in xrange(learnT):
+    for j in range(learnT):
     
     	# Propagation from input signals to layers 0, 1, and 2
         l0 = X
@@ -70,8 +73,8 @@ def fit(trainX=_trainX, trainY=_trainY, learnT=10000):
         _syn0 += 0.01*l0.T.dot(l1_delta)
         
         # Show the process of continue learning
-    else:
-        print "Taxa de acerto:", str(round((1 - np.mean(np.abs(l2_error)))*100, 4)) + "%"
+    #else:
+    #    print "Taxa de acerto:", str(round((1 - np.mean(np.abs(l2_error)))*100, 4)) + "%"
 
 def predict(v):
     l0 = np.array([v + [1]])
@@ -81,3 +84,39 @@ def predict(v):
         return True
     else: 
         return False
+
+def validation():
+    skf = StratifiedKFold(10, True, 1)
+    precision = []
+    f_measure = []
+    trainTime = []
+    accuracy = []
+    testTime = []
+    recall = []
+    
+    for train, test in skf.split(_trainX, _trainY):
+        trainX = map(lambda x: _trainX[x], train)
+        trainY = map(lambda x: _trainY[x], train)
+        testX = map(lambda x: _trainX[x], test)
+        testY = map(lambda x: _trainY[x], test)
+        
+        t0 = time.time()
+        fit(trainX, trainY)
+        trainTime.append(time.time() - t0)
+        
+        t0 = time.time()
+        predY = map(lambda x: predict(x), testX)
+        testTime.append((time.time() - t0)/len(testX))
+        
+        m, l = validate.confuseMatrix(predY, testY)
+        precision.append(validate.precision(True, m, l))
+        recall.append(validate.recall(True, m, l))
+        f_measure.append(validate.f_measure(True, m, l))
+        accuracy.append(validate.accuracy(m, l))
+    
+    print("precision: " + str(round(sum(precision)*100/len(precision), 2)) + "%")
+    print("recall: " + str(round(sum(recall)*100/len(recall), 2)) + "%")
+    print("f-measure: " + str(round(sum(f_measure)*100/len(f_measure), 2)) + "%")
+    print("accuracy: " + str(round(sum(accuracy)*100/len(accuracy), 2)) + "%")
+    print("train time: " + str(sum(f_measure)*100/len(f_measure)) + "sec")
+    print("test time: " + str(sum(accuracy)*100/len(accuracy)) + "sec")

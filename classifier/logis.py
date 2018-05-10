@@ -1,5 +1,5 @@
 from sklearn.linear_model import LogisticRegression
-from data import pln
+from classifier.data import pln
 import json
 
 _clf = None

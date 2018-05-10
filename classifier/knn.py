@@ -1,4 +1,4 @@
-from data import pln
+from classifier.data import pln
 import json
 
 with open("classifier/data/edited/trainX.json") as fl:

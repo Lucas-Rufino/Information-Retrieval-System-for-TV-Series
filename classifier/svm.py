@@ -1,5 +1,5 @@
 from sklearn import svm
-from data import pln
+from classifier.data import pln
 import json
 
 _clf = None

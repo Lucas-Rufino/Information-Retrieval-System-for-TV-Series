@@ -6,7 +6,7 @@ from keras.preprocessing import sequence
 from keras.layers import Dense
 from keras.layers import LSTM
 import numpy as np
-import lexer
+from classifier.data import lexer
 import json
 
 trainX = []

@@ -1,5 +1,5 @@
 from sklearn.naive_bayes import BernoulliNB
-from data import pln
+from classifier.data import pln
 import json
 
 _clf = None

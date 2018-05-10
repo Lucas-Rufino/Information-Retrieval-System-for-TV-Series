@@ -1,4 +1,4 @@
-import lexer
+from classifier.data import lexer
 import json
 
 trainX = []

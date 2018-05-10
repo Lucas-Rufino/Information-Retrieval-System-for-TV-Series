@@ -1,7 +1,7 @@
-from data import pln
+from classifier.data import pln
 
-def fit(trainX, trainY):
-    pass
+def fit(trainX=None, trainY=None):
+    print("trained")
 
 def predict(x):
     if x[pln._dicws['tvseries']] == 1:

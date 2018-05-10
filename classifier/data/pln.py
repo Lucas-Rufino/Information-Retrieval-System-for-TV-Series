@@ -1,4 +1,4 @@
-import lexer
+from classifier.data import lexer
 
 _words = ["tvseries", "tvseason", "seasons", "showid", "season", "rating", 
           "showtitle", "200x200", "creator", "startdate", "premiered", "00", 
