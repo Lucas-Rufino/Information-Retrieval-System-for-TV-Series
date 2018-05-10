@@ -1,8 +1,7 @@
 import reader as r
 import operator
 from bs4 import BeautifulSoup as bs
-from sklearn.cluster import KMeans
-import numpy as np
+import re
 
 
 def get_element(node):
@@ -79,25 +78,59 @@ def clean_text(text):
 #tentar pegar os resumes.
 
 def get_sinopses(element, max_size):
+    list_ = []
     for tag in element:
         clean_text(tag)
-        if len(tag) > max_size:
-            max_tag = tag
-            max_size = len(tag)
-    return max_tag
+        ap = True
+        path = get_css_path(tag.parent)
+        path_size = len(path)
+        noise = ["critics","review","movies","news","inbox","tv"]
+        text = str(tag)
+        text.lower()
+        for i in noise:
+            if i in text:
+                ap = False
+        if ap:
+            list_.append([tag,path_size])
+    return sorted(list_, key=chave)
 
+def chave(pair):
+    return (len(pair[0]), pair[1]*-1)
 def get_cast(soup):
     if soup.name is not None:
-        tags = soup.find_all("div")
+        tags = soup.find_all(["div","table","span","ol","td"])
         for item in tags:
             children = item.findChildren()
-            if len(children) == 2:
+            if len(children) >= 2 and len(children) <= 3:
                 cast_temp.append(item)
-        print(cast_temp)
+        cast = rank_element(cast_temp)
+    return clean_text(cast.text)
+
 def rank_element(list_to_rank):
     for item in list_to_rank:
+        parent = item.parent.parent
+        parent_path = get_css_path(parent)
+        aux[parent_path] = parent
+        if has_key(parent_path,ranked_element):
+            ranked_element[parent_path] = 1 + ranked_element[parent_path]
+        else:
+            ranked_element[parent_path]= 1
+    return aux[get_max(ranked_element)]
 
+def has_key(key, hash_element):
+    for i in hash_element:
+        if i == key:
+            return True
+    return False
 
+def get_max(mapList):
+    maxKey = ""
+    maxValue = 0
+    for key in mapList:
+        if maxValue < mapList[key]:
+            maxValue = mapList[key]
+            maxKey = key
+    return maxKey
 
 with open('extractor\sites.txt') as f:
     lines = f.readlines()
@@ -107,19 +140,16 @@ for site in lines:
     soup = r.get_link(site)
     removed = 0
     print(clean_page(soup,0))
+    ranked_element = {}
     cast_temp = []
-    get_cast(soup)
-    aux = { }
+    aux = {}
+    cast = get_cast(soup)
     ranking = []
-    # get_tree(soup)
-    # sorted_x = sorted(cast_temp.items(), key=operator.itemgetter(1))
-    
-    sorted(ranking, key=lambda x: len(x[0]))
-    print(ranking[-1])
-    #print(get_sinopses(cast_temp[-1][1]).text)
-    
     title = soup.title.text
     resume = get_sinopses(soup.html.find_all(text = True), 0)
+    print(title)
+    print(resume[-1][0])
+    print(cast)
 
     
     # bodyArray = body.text.strip()

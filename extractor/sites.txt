@@ -1,8 +1,10 @@
 https://www.rottentomatoes.com/tv/suits
-https://www.imdb.com/title/tt4276624/?ref_=adv_li_tt
-http://www.tvguide.com/tvshows/the-originals/555498/
-https://www.themoviedb.org/tv/1668-friends
-https://vimeo.com/ondemand/nashville
-http://www.sho.com/the-chi
-https://www.trackseries.tv/show/gotham
-http://www.metacritic.com/tv/the-rain 
+https://www.rottentomatoes.com/tv/empire
+https://www.rottentomatoes.com/tv/the_originals
+https://www.rottentomatoes.com/tv/the_americans
+https://www.rottentomatoes.com/tv/flash
+https://www.rottentomatoes.com/tv/criminal_minds
+https://www.rottentomatoes.com/tv/lost_in_space
+https://www.rottentomatoes.com/tv/the_x_files
+https://www.rottentomatoes.com/tv/westworld
+https://www.rottentomatoes.com/tv/riverdale 
