@@ -5,5 +5,5 @@ import json as js
 def get_link(link):
     
     r = rq.get(link)
-    soup = bs(r.content)
+    soup = bs(r.content, "lxml")
     return soup
