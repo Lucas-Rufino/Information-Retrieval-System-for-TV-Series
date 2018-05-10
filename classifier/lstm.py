@@ -14,7 +14,7 @@ trainY = []
 
 for i in xrange(10):
     i += 1
-    with open("dataset/htmls/" + str(i) + ".json") as fl:
+    with open("classifier/data/htmls/" + str(i) + ".json") as fl:
         ls = json.load(fl)
         fl.close()
     

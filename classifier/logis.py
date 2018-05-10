@@ -1,4 +1,4 @@
-from sklearn.naive_bayes import BernoulliNB
+from sklearn.linear_model import LogisticRegression
 from data import pln
 import json
 
@@ -12,7 +12,7 @@ with open("classifier/data/edited/trainY.json") as fl:
 
 def fit(trainX=_trainX, trainY=_trainY):
     global _clf
-    _clf = BernoulliNB()
+    _clf = LogisticRegression()
     _clf.fit(trainX, trainY)
 
 def predict(x):

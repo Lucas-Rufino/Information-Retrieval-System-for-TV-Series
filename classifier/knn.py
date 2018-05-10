@@ -1,12 +1,15 @@
 from data import pln
 import json
 
-with open("data/edited/trainX.json") as fl:
+with open("classifier/data/edited/trainX.json") as fl:
     trainX = json.load(fl)
     trainX = map(lambda x: pln.vectorize(x), trainX)
     
-with open("data/edited/trainY.json") as fl:
+with open("classifier/data/edited/trainY.json") as fl:
     trainY = json.load(fl)
+
+def fit(trainX, trainY):
+    pass
 
 def hamming(v, t):
     match = zip(v, t)
