@@ -1,7 +1,7 @@
 def confuseMatrix(predY, testY):
     labels = dict()
     classes = sorted(list(set(testY)))
-    matrix = map(lambda _: [0]*len(classes), xrange(len(classes)))
+    matrix = list(map(lambda _: [0]*len(classes), range(len(classes))))
     for i, c in enumerate(classes):
         labels[c] = i
     for y in zip(predY, testY):

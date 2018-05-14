@@ -1,7 +1,20 @@
-from classifier import tree as clf
 from classifier.data import pln
+from classifier import bayes
+from classifier import logis
+from classifier import tree
+from classifier import knn
+from classifier import mlp
+from classifier import svm
 
-clf.fit()       #sem parametros ele usa automaticamente a base que montei
-
-instance = pln.process("""HTML CONCATENADO COM URL""") # a entrada aqui
-print(clf.predict(instance))
+print("BAYES --- --- --- ---")
+bayes.validation()
+print("\nLOGIS --- --- --- ---")
+logis.validation()
+print("\nTREE --- --- --- ---")
+tree.validation()
+print("\nKNN --- --- --- ---")
+knn.validation()
+print("\nMLP --- --- --- ---")
+mlp.validation()
+print("\nSVM --- --- --- ---")
+svm.validation()
