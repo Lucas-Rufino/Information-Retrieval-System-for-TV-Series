@@ -80,7 +80,6 @@ def clean_text(text):
 def get_sinopses(element, max_size):
     list_ = []
     for tag in element:
-        clean_text(tag)
         ap = True
         path = get_css_path(tag.parent)
         path_size = len(path)
@@ -148,7 +147,7 @@ for site in lines:
     title = soup.title.text
     resume = get_sinopses(soup.html.find_all(text = True), 0)
     print(title)
-    print(resume[-1][0])
+    print(clean_text(resume[-1][0]))
     print(cast)
 
     
