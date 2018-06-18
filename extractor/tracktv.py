@@ -7,7 +7,7 @@ with open('extractor\sites.txt') as f:
 
 for site in lines:
     try:
-        soup = r.get_link("https://trakt.tv/shows/the-big-bang-theory")
+        soup = r.get_link(site)
         title = soup.find("div", {"class": "col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 mobile-title"}).text
         country = soup.find("li", {"itemprop": "countryOfOrigin"}).text
         language = soup.find("label",text = "Language").parent.text
