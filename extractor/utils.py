@@ -12,4 +12,5 @@ def writeToJson(fileName,path, data):
     filepath = path + '/' + fileName + '.json'
     with open(filepath, 'w') as fp:
         js.dump(data, fp)
-                             
+
+                          

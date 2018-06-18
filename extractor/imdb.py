@@ -30,7 +30,7 @@ for site in lines:
         country = details[1].a.text
         language = details[2].a.text
         all_text = soup.findAll(text = True)
-        page_text = "".join(filter(utils.visible,all_text) + "")
+        page_text = " ".join(filter(utils.visible,all_text))
         data = {}
         data['title'] = title.strip()
         data['resume'] = resume.strip()

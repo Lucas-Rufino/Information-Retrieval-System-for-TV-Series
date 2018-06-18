@@ -19,7 +19,7 @@ for site in lines:
             cast_list.append([actor,characther])
         rate = soup.find("div",{"class":"critic-score meter"}).span.text.strip()
         all_text = soup.findAll(text = True)
-        page_text = "".join(filter(utils.visible,all_text) + "")
+        page_text = " ".join(filter(utils.visible,all_text))
         print(page_text)
         data = {}
         data['title'] = title
