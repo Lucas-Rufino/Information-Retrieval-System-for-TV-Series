@@ -1,15 +1,10 @@
 import reader as r
-import json as js
+import utils as utils
 
 with open('extractor\sites.txt') as f:
     lines = f.readlines()
     f.close()
     
-def writeToJson(fileName,path, data):
-    filepath = path + '/' + fileName + '.json'
-    with open(filepath, 'w') as fp:
-        js.dump(data, fp)
-
 for site in lines:
     try:
         soup = r.get_link(site)
@@ -23,15 +18,19 @@ for site in lines:
             characther = str.replace(item.find("span",{"class": "characters subtle smaller"}).text,"as ","")
             cast_list.append([actor,characther])
         rate = soup.find("div",{"class":"critic-score meter"}).span.text.strip()
+        all_text = soup.findAll(text = True)
+        page_text = "".join(filter(utils.visible,all_text) + "")
+        print(page_text)
         data = {}
         data['title'] = title
         data['resume'] = resume
         data['rate'] = rate
         data['genre'] = genre
         data['cast'] = cast_list
+        data['site_data'] = page_text
         path = 'extractor/rottentomatoes'
         fileName = title
-        writeToJson(fileName,path,data)
+        utils.writeToJson(fileName,path,data)
     except AttributeError:
         continue
 
