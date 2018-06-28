@@ -1,14 +1,20 @@
-import reader as r
 import utils
+import requests
 
-with open('extractor\sites.txt') as f:
+with open('extractor\stvguide.txt') as f:
     lines = f.readlines()
     f.close()
 for site in lines:
     try:
-        soup = r.get_link(site)
+        soup = utils.get_link(site)
+        genre = ""
+        title = ""
+        cast_list = {}
+        rating = ""
+        resume = ""
         try:
             title = soup.title.text.strip()
+            title = title.split("-")[0]
         except AttributeError:
             pass
         try:
@@ -38,7 +44,10 @@ for site in lines:
             fileName = title
             utils.writeToJson(fileName,path, data)
     except ConnectionError:
-        print(site)
+        continue
+    except requests.exceptions.HTTPError: 
+        continue
+        
 
         
 

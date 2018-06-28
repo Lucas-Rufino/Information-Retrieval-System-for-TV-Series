@@ -1,20 +1,21 @@
-import reader as r
-import utils as utils
 
-with open('extractor\sites.txt') as f:
+import utils as utils
+import requests
+
+with open('extractor\srottentomatoes.txt') as f:
     lines = f.readlines()
     f.close()
     
 for site in lines:
     try:
-        soup = r.get_link(site)
+        soup = utils.get_link(site)  
         genre = ""
         title = ""
         cast_list = {}
         rate = ""
         try:
             title = soup.title.text.strip()
-            title = title.split("-")[0]
+            title = title.split("-")[0].strip()
         except AttributeError:
             pass
         try:
@@ -22,7 +23,7 @@ for site in lines:
         except AttributeError:
             pass
         try:
-            genre = soup.find("td", text = "Genre:").parent.text.split("\n")[2];
+            genre = soup.find("td", text = "Genre:").parent.text.split("\n")[2].strip();
         except AttributeError:
             pass
         try:
@@ -41,19 +42,21 @@ for site in lines:
             rate = soup.find("span",{"class":"meter-value superPageFontColor"}).span.text.strip()
         except AttributeError:
             pass
-        page_text = utils.visible(soup)
         data = {}
         data['title'] = title
         data['resume'] = resume
         data['rate'] = rate
         data['genre'] = genre
         data['cast'] = cast_list
+        page_text = utils.text_from_html(soup)
         data['site_data'] = page_text
         path = 'extractor/rottentomatoes'
         fileName = title
         utils.writeToJson(fileName,path,data)
     except ConnectionError:
         print(site)
+    except requests.exceptions.HTTPError: 
+        continue
 
 
 

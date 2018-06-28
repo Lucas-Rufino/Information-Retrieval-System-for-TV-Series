@@ -1,40 +1,43 @@
-import reader as r
 import utils
+import requests
 
-with open('extractor\sites.txt') as f:
+with open('extractor\simdb.txt') as f:
     lines = f.readlines()
     f.close()
 for site in lines:
     try:
-        soup = r.get_link(site)
+        soup = utils.get_link(site)
+        genre = ""
+        title = ""
+        cast_list = {}
+        rating = ""
+        resume = ""
     
         try:
-            title = soup.find("h1",{"itemprop": "name"}).text
+            title = soup.title.text.strip()
+            title = title.split("(")[0].strip()
         except AttributeError:
             pass
         try:
             rating = soup.find("span",{"itemprop": "ratingValue" }).text
+            rating = str(float(rating) * 10)
         except AttributeError:
             pass
         try:
             cast_table = soup.find("table", {"class" : "cast_list"}).find_all("span",{"class": "itemprop"})
-        except AttributeError:
-            pass
-        actors = []
-        for item in cast_table:
-            actors.append(item.text)
-            
-        characters = []
-        try:
+            actors = []
+            for item in cast_table:
+                actors.append(item.text)
+            characters = []
             character_list = soup.find("table", {"class": "cast_list"}).find_all("td",{"class": "character"})
+            for item in character_list:
+                   characters.append(item.a.text)
+            cast_list.update({"actor": actors,"character":characters})
         except AttributeError:
             pass
-        for item in character_list:
-            characters.append(item.find("div").a.text)
-            
-        cast = zip(actors,characters)
+   
         try:    
-            resume = soup.find("div", {"itemprop": "description"}).text
+            resume = soup.find("span", {"itemprop": "description"}).text
         except AttributeError:
             pass
         try:
@@ -52,11 +55,13 @@ for site in lines:
         data['resume'] = resume.strip()
         data['rate'] = rating.strip()
         data['genre'] = genre
-        data['cast'] = cast
+        data['cast'] = cast_list
         data['site_data'] = page_text
         path = "extractor/imdb"
         fileName = title
         utils.writeToJson(fileName,path, data)
     except ConnectionError:
-        print(site)
+        continue
+    except requests.exceptions.HTTPError: 
+        continue
  
