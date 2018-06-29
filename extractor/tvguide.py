@@ -12,7 +12,7 @@ def get_data(site, count):
         resume = ""
         try:
             title = soup.title.text.strip()
-            title = title.split("-")[0]
+            title = title.split("-")[0].strip()
         except AttributeError:
             pass
         try:

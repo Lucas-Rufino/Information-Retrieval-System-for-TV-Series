@@ -43,7 +43,7 @@ def get_data(site,count):
             data['cast'] = cast_list
             data['site_data'] = page_text
             path = "extractor/tracktv"
-            fileName = title
+            fileName = count
             utils.writeToJson(fileName,path, data)
     except ConnectionError:
         pass

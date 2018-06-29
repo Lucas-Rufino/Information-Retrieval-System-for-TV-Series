@@ -26,7 +26,6 @@ def get_link(link):
     r = rq.get(link)
     r.raise_for_status()
     soup = bs(r.content, "lxml")
-    print(r.status_code)
     return soup
     
 

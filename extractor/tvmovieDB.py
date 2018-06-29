@@ -1,15 +1,16 @@
-import reader as r
+import requests
 import utils
 
-with open('extractor\sites.txt') as f:
-    lines = f.readlines()
-    f.close()
-
-for site in lines:
+def get_data(site, count):
     try:
-        soup = r.get_link(site)
+        soup = utils.get_link(site)
+        genre = []
+        title = ""
+        cast_list = {}
+        rate = ""
         try:
             title = soup.find("div", {"class":"title"}).text.strip()
+            title = title.split("(")[0].strip()
         except AttributeError:
             pass
         try:
@@ -18,13 +19,22 @@ for site in lines:
             pass
         try:
             cast = soup.find("ol",{"class": "people scroller"}).find_all("li")
-            cast_list = []
+            cast_l = []
+            actor_list = []
+            character_list = []
             for item in cast:
-                cast_list.append(item.text.strip().split("\n"))
+                cast_l.append(item.text.strip().split("\n"))
+            for item in cast_l:
+                actor_list.append(item[0])
+                character_list.append(item[1])
+            cast_list.update({"actor": actor_list,"character":character_list})
         except AttributeError:
             pass
         try:
-            genre = soup.find("section",{"class": "genres right_column"}).find("li").text
+            genres = soup.find("section",{"class": "genres right_column"}).find_all("ul")
+            for item in genres:
+                genre.append(item.text.replace("\n",""))
+                
         except AttributeError:
             pass
         try:
@@ -35,6 +45,7 @@ for site in lines:
         all_text = soup.findAll(text = True)
         page_text = " ".join(filter(utils.visible,all_text))
         data = {}
+        data['link'] = site
         data['title'] = title.strip()
         data['resume'] = resume.strip()
         data['rate'] = rating[0].text.strip()
@@ -42,7 +53,9 @@ for site in lines:
         data['cast'] = cast_list
         data['site_data'] = page_text
         path = "extractor/tvmovidDB"
-        fileName = title
+        fileName = count
         utils.writeToJson(fileName,path, data)
     except ConnectionError:
         print(site)
+    except requests.exceptions.HTTPError: 
+        pass
