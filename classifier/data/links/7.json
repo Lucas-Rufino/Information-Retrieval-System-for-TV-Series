@@ -1,0 +1,22 @@
+[
+	["https://vimeo.com/ondemand/sherlockseries", true],
+	["https://vimeo.com/ondemand/madmen", true],
+	["https://vimeo.com/ondemand/boss", true],
+	["https://vimeo.com/ondemand/theroyals", true],
+	["https://vimeo.com/ondemand/nursejackie", true],
+	["https://vimeo.com/ondemand/manhattanseries", true],
+	["https://vimeo.com/ondemand/conmanseries", true],
+	["https://vimeo.com/ondemand/bluemountainstate", true],
+	["https://vimeo.com/ondemand/nashville", true],
+	["https://vimeo.com/ondemand/brothersseason1", true],
+	["https://vimeo.com/", false],
+	["https://vimeo.com/professionals", false],
+	["https://vimeo.com/features", false],
+	["https://vimeo.com/channels/staffpicks", false],
+	["https://vimeo.com/create", false],
+	["https://vimeo.com/ondemand/discover/oscars", false],
+	["https://vimeo.com/ondemand/discover/originals", false],
+	["https://vimeo.com/ondemand/browse/tv+series", false],
+	["https://vimeo.com/ondemand", false],
+	["https://vimeo.com/ondemand/ilsilenzio", false]
+]

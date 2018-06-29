@@ -1,0 +1,15 @@
+[
+	["https://www.trackseries.tv/show/game-of-thrones", true],
+	["https://www.trackseries.tv/show/the-walking-dead", true],
+	["https://www.trackseries.tv/show/sherlock", true],
+	["https://www.trackseries.tv/show/the-flash-2014", true],
+	["https://www.trackseries.tv/show/arrow", true],
+	["https://www.trackseries.tv/show/the-big-bang-theory", true],
+	["https://www.trackseries.tv/show/breaking-bad", true],
+	["https://www.trackseries.tv/show/suits", true],
+	["https://www.trackseries.tv/show/marvels-agents-of-shield", true],
+	["https://www.trackseries.tv/show/gotham", true],
+	["https://www.trackseries.tv/topSeries", false],
+	["https://www.trackseries.tv", false],
+	["https://www.trackseries.tv/login", false]
+]

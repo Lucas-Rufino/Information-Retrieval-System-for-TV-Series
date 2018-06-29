@@ -1,0 +1,22 @@
+[
+	["http://www.sho.com/dexter", true],
+	["http://www.sho.com/dark-net", true],
+	["http://www.sho.com/homeland", true],
+	["http://www.sho.com/the-tudors", true],
+	["http://www.sho.com/penny-dreadful", true],
+	["http://www.sho.com/house-of-lies", true],
+	["http://www.sho.com/ill-behaviour", true],
+	["http://www.sho.com/the-chi", true],
+	["http://www.sho.com/californication", true],
+	["http://www.sho.com/episodes ", true],
+	["http://www.sho.com", false],
+	["http://www.sho.com/movies", false],
+	["http://www.sho.com/sports", false],
+	["http://www.sho.com/documentaries", false],
+	["http://www.sho.com/comedy", false],
+	["http://www.sho.com/titles/3447903/ghost-in-the-shell", false],
+	["http://www.sho.com/titles/3414895/pirates-of-the-caribbean-dead-mans-chest", false],
+	["http://www.sho.com/titles/3426048/the-space-between-us", false],
+	["http://www.sho.com/sports/ring-resume", false],
+	["http://www.sho.com/titles/3396728/listen-to-me-marlon", false]
+]
