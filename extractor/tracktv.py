@@ -1,13 +1,11 @@
-import reader as r
+
 import utils
+import requests
 
-with open('extractor\sites.txt') as f:
-    lines = f.readlines()
-    f.close()
 
-for site in lines:
+def get_data(site,count):
     try:
-        soup = r.get_link(site)
+        soup = utils.get_link(site)
         try:
             title = soup.find("div", {"class": "col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 mobile-title"}).text
         except AttributeError:
@@ -37,6 +35,7 @@ for site in lines:
             all_text = soup.findAll(text = True)
             page_text = " ".join(filter(utils.visible,all_text))
             data = {}
+            data['link'] = site
             data['title'] = title.strip()
             data['resume'] = resume.strip()
             data['rate'] = rating.strip()
@@ -47,4 +46,6 @@ for site in lines:
             fileName = title
             utils.writeToJson(fileName,path, data)
     except ConnectionError:
-        print(site)
+        pass
+    except requests.exceptions.HTTPError: 
+        pass

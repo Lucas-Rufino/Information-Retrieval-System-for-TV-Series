@@ -2,11 +2,7 @@
 import utils as utils
 import requests
 
-with open('extractor\srottentomatoes.txt') as f:
-    lines = f.readlines()
-    f.close()
-    
-for site in lines:
+def get_data(site,count):    
     try:
         soup = utils.get_link(site)  
         genre = ""
@@ -43,6 +39,7 @@ for site in lines:
         except AttributeError:
             pass
         data = {}
+        data['link'] = site
         data['title'] = title
         data['resume'] = resume
         data['rate'] = rate
@@ -51,12 +48,12 @@ for site in lines:
         page_text = utils.text_from_html(soup)
         data['site_data'] = page_text
         path = 'extractor/rottentomatoes'
-        fileName = title
+        fileName = count
         utils.writeToJson(fileName,path,data)
     except ConnectionError:
-        print(site)
+        pass
     except requests.exceptions.HTTPError: 
-        continue
+        pass
 
 
 

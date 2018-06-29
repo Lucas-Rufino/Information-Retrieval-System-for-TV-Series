@@ -1,10 +1,8 @@
 import utils
 import requests
 
-with open('extractor\stvguide.txt') as f:
-    lines = f.readlines()
-    f.close()
-for site in lines:
+
+def get_data(site, count):
     try:
         soup = utils.get_link(site)
         genre = ""
@@ -35,18 +33,19 @@ for site in lines:
             all_text = soup.findAll(text = True)
             page_text = " ".join(filter(utils.visible,all_text))
             data = {}
+            data['link'] = site
             data['title'] = title.strip()
             data['resume'] = resume.strip()
             data['rate'] = rating.strip()
             data['cast'] = cast_list
             data['site_data'] = page_text
             path = "extractor/tvguide"
-            fileName = title
+            fileName = count
             utils.writeToJson(fileName,path, data)
     except ConnectionError:
-        continue
+        pass
     except requests.exceptions.HTTPError: 
-        continue
+        pass
         
 
         
