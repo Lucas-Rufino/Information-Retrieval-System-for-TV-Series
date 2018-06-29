@@ -1,0 +1,22 @@
+[
+	["https://7plus.com.au/GOOD", true],
+	["https://7plus.com.au/GREY", true],
+	["https://7plus.com.au/HOAM", true],
+	["https://7plus.com.au/HMYM", true],
+	["https://7plus.com.au/MOFA", true],
+	["https://7plus.com.au/BLKL", true],
+	["https://7plus.com.au/SCAN", true],
+	["https://7plus.com.au/ROYS", true],
+	["https://7plus.com.au/MAOS", true],
+	["https://7plus.com.au/HKAU", true],
+	["https://7plus.com.au/home", false],
+	["https://7plus.com.au/shows-a-z", false],
+	["https://7plus.com.au/live-tv", false],
+	["https://support.7plus.com.au", false],
+	["http://support.7plus.com.au/terms/", false],
+	["http://www.sevenwestmedia.com.au/privacy-policies/privacy", false],
+	["https://about.7plus.com.au", false],
+	["http://support.7plus.com.au/contact/", false],
+	["https://7plus.com.au/WSUN?episode-id=SSUN18-018", false],
+	["https://7plus.com.au/7NNS?episode-id=7NNS18-126", false]
+]
