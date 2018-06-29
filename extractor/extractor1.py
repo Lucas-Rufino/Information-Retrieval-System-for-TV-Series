@@ -1,4 +1,4 @@
-import reader as r
+import utils
 import operator
 from bs4 import BeautifulSoup as bs
 import re
@@ -136,7 +136,7 @@ with open('extractor\sites.txt') as f:
     f.close()
     
 for site in lines:
-    soup = r.get_link(site)
+    soup = utils.get_link(site)
     removed = 0
     print(clean_page(soup,0))
     ranked_element = {}
