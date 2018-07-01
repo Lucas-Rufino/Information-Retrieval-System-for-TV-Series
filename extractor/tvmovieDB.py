@@ -7,6 +7,7 @@ def get_data(site, count):
         genre = []
         title = ""
         cast_list = {}
+        characters_list = {}
         rate = ""
         try:
             title = soup.find("div", {"class":"title"}).text.strip()
@@ -26,19 +27,24 @@ def get_data(site, count):
                 cast_l.append(item.text.strip().split("\n"))
             for item in cast_l:
                 actor_list.append(item[0])
-                character_list.append(item[1])
-            cast_list.update({"actor": actor_list,"character":character_list})
+                if len(item) == 2:
+                    character_list.append(item[1])
+            cast_list.update({"actor": actor_list})
+            characters_list.update({"characters": character_list})
         except AttributeError:
             pass
         try:
             genres = soup.find("section",{"class": "genres right_column"}).find_all("ul")
             for item in genres:
-                genre.append(item.text.replace("\n",""))
+                gr = item.text.replace("\n", " ").strip().split(" ")
+                for i in gr:
+                    if len(i) > 2:
+                        genre.append(i)
                 
         except AttributeError:
             pass
         try:
-            rating = soup.find("div", {"class": "percent"}).findChildren()
+            rate = soup.find("div", {"class": "percent"}).findChildren().text()
         except AttributeError:
             pass
         data = {}
@@ -48,9 +54,10 @@ def get_data(site, count):
         data['link'] = site
         data['title'] = title.strip()
         data['resume'] = resume.strip()
-        data['rate'] = rating[0].text.strip()
+        data['rate'] = rate
         data['genre'] = genre
         data['cast'] = cast_list
+        data['characters'] = characters_list
         data['site_data'] = page_text
         path = "extractor/tvmovidDB"
         fileName = count

@@ -15,16 +15,14 @@ count = 1;
 #     rottentomatoes.get_data(site, str(count))
 #     count+=1
     
-# with open('extractor\stracktv.txt') as f:
+data = utils.readJson('extractor\stvMovieDB2.json')
+for site in data:
+    tvmovieDB.get_data(site[1],str(site[0]))
+    
+
+# with open('extractor\stvmovieDB.txt') as f:
 #     lines = f.readlines()
 #     f.close()
 # for site in lines:
-#     tracktv.get_data(site,str(count))
+#     tvmovieDB.get_data(site,str(count))
 #     count+=1
-
-with open('extractor\stvmovieDB.txt') as f:
-    lines = f.readlines()
-    f.close()
-for site in lines:
-    tvmovieDB.get_data(site,str(count))
-    count+=1
