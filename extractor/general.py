@@ -1,4 +1,4 @@
-import reader as r
+
 import re
 import xml.dom as xml
 
@@ -51,7 +51,7 @@ def walk(element, title):
 
     
 for site in lines:
-    soup = r.get_link(site)
+    soup = utils.get_link(site)
     walk(soup.find("body"),soup.title.text)
 print(map_series_info)
 

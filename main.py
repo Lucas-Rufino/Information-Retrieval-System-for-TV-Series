@@ -4,7 +4,7 @@ from indexer import processor
 import json
 import os
 
-iFile = index.Frequency() #Basic() ou Positional()
+iFile = index.Basic() #Basic() ou Positional()
 iFile.load()
 print(iFile.search({'resume':['event','friendship']}))
 

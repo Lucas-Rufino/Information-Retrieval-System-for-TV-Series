@@ -48,6 +48,9 @@ class Basic(Inverted):
 
     def search(self, by):
         result = {}
+        all = by.get('all', None)
+        if all is not None:
+            by = {'title': all,'genre':all,'rate':all,'resume':all,'cast':all}
         for attr in by.keys():
             if attr in self._attrs:
                 aux = self._db.get(attr, None)
@@ -76,6 +79,9 @@ class Frequency(Inverted):
 
     def search(self, by):
         result = {}
+        all = by.get('all', None)
+        if all is not None:
+            by = {'title': all,'genre':all,'rate':all,'resume':all,'cast':all}
         for attr in by.keys():
             if attr in self._attrs:
                 aux = self._db.get(attr, None)
@@ -104,6 +110,9 @@ class Positional(Inverted):
 
     def search(self, by):
         result = {}
+        all = by.get('all', None)
+        if all is not None:
+            by = {'title': all,'genre':all,'rate':all,'resume':all,'cast':all}
         for attr in by.keys():
             if attr in self._attrs:
                 aux = self._db.get(attr, None)
