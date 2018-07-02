@@ -33,6 +33,12 @@ class Inverted(object):
         with open(path, 'w') as fl:
             pickle.dump(data, fl) if serialize else json.dump(data, fl)
 
+    def covertAll(self, by):
+        all = by.get('all', None)
+        if all is not None:
+            by = { attr:all for attr in self._attrs }
+        return by
+
 class Basic(Inverted):
     def __init__(self):
         super().__init__("basic/")
@@ -48,9 +54,7 @@ class Basic(Inverted):
 
     def search(self, by):
         result = {}
-        all = by.get('all', None)
-        if all is not None:
-            by = {'title': all,'genre':all,'rate':all,'resume':all,'cast':all}
+        by = self.covertAll(by)
         for attr in by.keys():
             if attr in self._attrs:
                 aux = self._db.get(attr, None)
@@ -79,9 +83,7 @@ class Frequency(Inverted):
 
     def search(self, by):
         result = {}
-        all = by.get('all', None)
-        if all is not None:
-            by = {'title': all,'genre':all,'rate':all,'resume':all,'cast':all}
+        by = self.covertAll(by)
         for attr in by.keys():
             if attr in self._attrs:
                 aux = self._db.get(attr, None)
@@ -110,9 +112,7 @@ class Positional(Inverted):
 
     def search(self, by):
         result = {}
-        all = by.get('all', None)
-        if all is not None:
-            by = {'title': all,'genre':all,'rate':all,'resume':all,'cast':all}
+        by = self.covertAll(by)
         for attr in by.keys():
             if attr in self._attrs:
                 aux = self._db.get(attr, None)
