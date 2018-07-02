@@ -1,0 +1,22 @@
+[
+    ["https://www.themoviedb.org/tv/1421-modern-family", true],
+    ["https://www.themoviedb.org/tv/1399-game-of-thrones", true],
+    ["https://www.themoviedb.org/tv/62688-supergirl", true],
+    ["https://www.themoviedb.org/tv/57243-doctor-who", true],
+    ["https://www.themoviedb.org/tv/1668-friends", true],
+    ["https://www.themoviedb.org/tv/61555-the-missing", true],
+    ["https://www.themoviedb.org/tv/456-the-simpsons", true],
+    ["https://www.themoviedb.org/tv/60735-the-flash", true],
+    ["https://www.themoviedb.org/tv/1622-supernatural", true],
+    ["https://www.themoviedb.org/tv/1418-the-big-bang-theory", true],
+    ["https://www.themoviedb.org", false],
+    ["https://www.themoviedb.org/discover/movie", false],
+    ["https://www.themoviedb.org/movie/321612-beauty-and-the-beast", false],
+    ["https://www.themoviedb.org/movie/335984-blade-runner-2049", false],
+    ["https://www.themoviedb.org/movie/274855-geostorm", false],
+    ["https://www.themoviedb.org/person", false],
+    ["https://www.themoviedb.org/person/819-edward-norton", false],
+    ["https://www.themoviedb.org/person/74568-chris-hemsworth", false],
+    ["https://www.themoviedb.org/person/72129-jennifer-lawrence", false],
+    ["https://www.themoviedb.org/tv", false]
+]

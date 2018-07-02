@@ -1,0 +1,22 @@
+[
+    ["http://www.tvguide.com/tvshows/riverdale/716263/", true],
+    ["http://www.tvguide.com/tvshows/the-flash/644014/", true],
+    ["http://www.tvguide.com/tvshows/the-originals/555498/", true],
+    ["http://www.tvguide.com/tvshows/the-good-doctor/cast/1041642/", true],
+    ["http://www.tvguide.com/tvshows/the-walking-dead/cast/303547/", true],
+    ["http://www.tvguide.com/tvshows/siren/957572/", true],
+    ["http://www.tvguide.com/tvshows/house/100213/", true],
+    ["http://www.tvguide.com/tvshows/how-i-met-your-mother/192257/", true],
+    ["http://www.tvguide.com/tvshows/once-upon-a-time/319533/", true],
+    ["http://www.tvguide.com/tvshows/the-quest/557391/", true],
+    ["http://www.tvguide.com", false],
+    ["http://www.tvguide.com/listings/", false],
+    ["http://www.tvguide.com/news/", false],
+    ["http://www.tvguide.com/special/grammys/", false],
+    ["http://www.tvguide.com/soap-operas/", false],
+    ["http://www.tvguide.com/sports/nhl/", false],
+    ["http://www.tvguide.com/sports/live-today/", false],
+    ["http://www.tvguide.com/special/spring-preview/", false],
+    ["http://www.tvguide.com/movies/casino-royale/284443/", false],
+    ["http://www.tvguide.com/movies/interstellar/716993/", false]
+]
