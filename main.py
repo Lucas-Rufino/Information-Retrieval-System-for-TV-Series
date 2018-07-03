@@ -4,16 +4,16 @@ from indexer import processor
 import json
 import os
 
-iFile = index.Basic() #Basic() ou Positional()
-iFile.load(mode='interval', serialize=False)
-iFile.save(serialize=False)
+iFile = index.Positional() #Basic() ou Positional()
+iFile.load()
+iFile.save(mode='bytecode', serialize=True)
 # print(iFile.search({'resume':['event', 'world','friendship']}))
 
 # print(iFile.search({'all':['park', 'android']}))
 #
 # {
-#     'title': processor.text('parque de diversão'),
-#     'resume': processor.text('parque de diversão'),
+#     'title': processor.text('parque de diversao'),
+#     'resume': processor.text('parque de diversao'),
 #     'cast': processor.name(''),
 #     'rate': processor.number(valor),
 #     'genre': ['park', 'android']

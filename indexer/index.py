@@ -16,9 +16,9 @@ class Inverted(object):
         if mode ==  'normal':
             self._db = data
         elif mode ==  'interval':
-            self._db = decode.interval(data, self)
+            self._db = decode.interval(data, self._local)
         elif mode ==  'bytecode':
-            self._db = decode.bytecode(data, self)
+            self._db = decode.bytecode(data, self._local)
 
     def save(self, mode='normal', serialize=False):
         data = None
@@ -27,9 +27,9 @@ class Inverted(object):
         if mode ==  'normal':
             data = self._db
         elif mode ==  'interval':
-            data = encode.interval(self._db, self)
+            data = encode.interval(self._db, self._local)
         elif mode ==  'bytecode':
-            data = encode.bytecode(self._db, self)
+            data = encode.bytecode(self._db, self._local)
         with open(path, 'wb' if serialize else 'w') as fl:
             if serialize:
                 pickle.dump(data, fl)
