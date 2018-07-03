@@ -6,8 +6,6 @@ def get_data(site, count):
         soup = utils.get_link(site)
         genre = []
         title = ""
-        cast_list = {}
-        characters_list = {}
         rate = ""
         try:
             title = soup.find("div", {"class":"title"}).text.strip()
@@ -17,7 +15,7 @@ def get_data(site, count):
         try:
             resume = soup.find("div", {"class": "overview"}).text
         except AttributeError:
-            pass
+            resume = None
         try:
             cast = soup.find("ol",{"class": "people scroller"}).find_all("li")
             cast_l = []
@@ -29,10 +27,9 @@ def get_data(site, count):
                 actor_list.append(item[0])
                 if len(item) == 2:
                     character_list.append(item[1])
-            cast_list.update({"actor": actor_list})
-            characters_list.update({"characters": character_list})
         except AttributeError:
-            pass
+            actor_list = []
+            character_list = []
         try:
             genres = soup.find("section",{"class": "genres right_column"}).find_all("ul")
             for item in genres:
@@ -40,13 +37,12 @@ def get_data(site, count):
                 for i in gr:
                     if len(i) > 2:
                         genre.append(i)
-                
         except AttributeError:
-            pass
+            genres = []
         try:
-            rate = soup.find("div", {"class": "percent"}).findChildren().text()
+            rate = soup.find("div", class_="user_score_chart")['data-percent']
         except AttributeError:
-            pass
+            rate = None
         data = {}
         all_text = soup.findAll(text = True)
         page_text = " ".join(filter(utils.visible,all_text))
@@ -56,13 +52,13 @@ def get_data(site, count):
         data['resume'] = resume.strip()
         data['rate'] = rate
         data['genre'] = genre
-        data['cast'] = cast_list
-        data['characters'] = characters_list
+        data['cast'] = actor_list
+        data['character'] = character_list
         data['site_data'] = page_text
         path = "extractor/tvmovidDB"
         fileName = count
         utils.writeToJson(fileName,path, data)
     except ConnectionError:
-        print(site)
+        pass
     except requests.exceptions.HTTPError: 
         pass
