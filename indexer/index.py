@@ -9,29 +9,32 @@ class Inverted(object):
         self._db = {}
 
     def load(self, mode='normal', serialize=False):
-        s = 'serialized/db' if serialize else 'db'
-        path = 'indexer/database/' + self._local + mode + '/' + s
-        with open(path) as fl:
+        s = 'serialized/' + mode + '/db' if serialize else mode + '/db'
+        path = 'indexer/database/' + self._local + s
+        with open(path, 'rb' if serialize else 'r') as fl:
             data = pickle.load(fl) if serialize else json.load(fl)
         if mode ==  'normal':
             self._db = data
         elif mode ==  'interval':
-            self._db = decode.interval(data)
+            self._db = decode.interval(data, self)
         elif mode ==  'bytecode':
-            self._db = decode.bytecode(data)
+            self._db = decode.bytecode(data, self)
 
     def save(self, mode='normal', serialize=False):
         data = None
-        s = 'serialized/db' if serialize else 'db'
-        path = 'indexer/database/' + self._local + mode + '/' + s
+        s = 'serialized/' + mode + '/' + 'db' if serialize else mode + '/db'
+        path = 'indexer/database/' + self._local + s
         if mode ==  'normal':
             data = self._db
         elif mode ==  'interval':
-            data = encode.interval(self._db)
+            data = encode.interval(self._db, self)
         elif mode ==  'bytecode':
-            data = encode.bytecode(self._db)
-        with open(path, 'w') as fl:
-            pickle.dump(data, fl) if serialize else json.dump(data, fl)
+            data = encode.bytecode(self._db, self)
+        with open(path, 'wb' if serialize else 'w') as fl:
+            if serialize:
+                pickle.dump(data, fl)
+            else:
+                json.dump(data, fl)
 
     def covertAll(self, by):
         all = by.get('all', None)

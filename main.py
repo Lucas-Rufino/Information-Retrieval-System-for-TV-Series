@@ -4,9 +4,10 @@ from indexer import processor
 import json
 import os
 
-iFile = index.Frequency() #Basic() ou Positional()
-iFile.load()
-print(iFile.search({'resume':['event', 'world','friendship']}))
+iFile = index.Basic() #Basic() ou Positional()
+iFile.load(mode='interval', serialize=False)
+iFile.save(serialize=False)
+# print(iFile.search({'resume':['event', 'world','friendship']}))
 
 # print(iFile.search({'all':['park', 'android']}))
 #
@@ -20,22 +21,23 @@ print(iFile.search({'resume':['event', 'world','friendship']}))
 
 
 # filenames = list(os.walk('database/'))[0][2]
-# for filename in filenames:
-#     print(filename)
-#     with open('database/' + filename) as fl:
+# filenames = sorted([ int(f[:-5]) for f in filenames if f != '.DS_Store' ])
+# for i, filename in enumerate(filenames):
+#     print(i, '-', filename)
+#     with open('database/' + str(filename) + '.json') as fl:
 #         item = json.load(fl)
 #     for attr in ['title', 'genre', 'rate', 'resume', 'cast']:
 #         aux = item.get(attr, None)
-#         if aux is not None or aux != []:
+#         if aux is not None and aux != []:
 #             if attr == 'title' or attr == 'resume':
 #                 words = processor.text(aux)
 #             elif attr == 'cast':
 #                 words = []
 #                 for actor in aux:
-#                     words.extend(processor.text(actor))
+#                     words.extend(processor.name(actor))
 #             elif attr == 'genre':
 #                 words = processor.category(aux)
 #             elif attr == 'rate':
 #                 words = processor.number(aux)
-#             iFile.insert(int(filename[:-5]), attr, words)
+#             iFile.insert(filename, attr, words)
 # iFile.save()
