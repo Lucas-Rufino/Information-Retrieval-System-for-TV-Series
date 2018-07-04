@@ -52,6 +52,9 @@ class Inverted(object):
         total = sum(self._size.values())
         return total
 
+    def numDocs(self):
+        return len(self._size)
+
 class Basic(Inverted):
     def __init__(self):
         super().__init__("basic/")
@@ -82,6 +85,16 @@ class Basic(Inverted):
                                 i = i.setdefault(attr, [])
                                 i.append(word)
         return result
+
+    def ocorrences():
+        data = {}
+        for attr in self._db.keys():
+            data = data.setdefault(key, {})
+            for word in self._db[key].keys():
+                data = data.setdefault(word, [])
+                for id in self._db[key][word]:
+                    data.append(id)
+        return data
 
 class Frequency(Inverted):
     def __init__(self):
@@ -114,6 +127,14 @@ class Frequency(Inverted):
                                 i.setdefault(word, aux2[id])
         return result
 
+    def ocorrences():
+        data = {}
+        for attr in self._db.keys():
+            data = data.setdefault(key, {})
+            for word in self._db[key].keys():
+                data = data.setdefault(word, self._db[key][word].keys())
+        return data
+
 class Positional(Inverted):
     def __init__(self):
         super().__init__("positional/")
@@ -144,3 +165,11 @@ class Positional(Inverted):
                                 i = i.setdefault(attr, {})
                                 i.setdefault(word, aux2[id])
         return result
+
+    def ocorrences():
+        data = {}
+        for attr in self._db.keys():
+            data = data.setdefault(key, {})
+            for word in self._db[key].keys():
+                data = data.setdefault(word, self._db[key][word].keys())
+        return data
