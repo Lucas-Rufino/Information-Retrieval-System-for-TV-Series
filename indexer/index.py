@@ -53,7 +53,7 @@ class Inverted(object):
         return total
 
     def numDocs(self):
-        return len(self._size)
+        return len(self._size.values())
 
 class Basic(Inverted):
     def __init__(self):
@@ -86,14 +86,12 @@ class Basic(Inverted):
                                 i.append(word)
         return result
 
-    def ocorrences():
+    def ocorrences(self):
         data = {}
         for attr in self._db.keys():
-            data = data.setdefault(key, {})
-            for word in self._db[key].keys():
-                data = data.setdefault(word, [])
-                for id in self._db[key][word]:
-                    data.append(id)
+            aux = data.setdefault(attr, {})
+            for word in self._db[attr].keys():
+                aux.setdefault(word, set(self._db[attr][word]))
         return data
 
 class Frequency(Inverted):
@@ -127,12 +125,12 @@ class Frequency(Inverted):
                                 i.setdefault(word, aux2[id])
         return result
 
-    def ocorrences():
+    def ocorrences(self):
         data = {}
         for attr in self._db.keys():
-            data = data.setdefault(key, {})
-            for word in self._db[key].keys():
-                data = data.setdefault(word, self._db[key][word].keys())
+            aux = data.setdefault(attr, {})
+            for word in self._db[attr].keys():
+                aux.setdefault(word, set(self._db[attr][word].keys()))
         return data
 
 class Positional(Inverted):
@@ -166,10 +164,10 @@ class Positional(Inverted):
                                 i.setdefault(word, aux2[id])
         return result
 
-    def ocorrences():
+    def ocorrences(self):
         data = {}
         for attr in self._db.keys():
-            data = data.setdefault(key, {})
-            for word in self._db[key].keys():
-                data = data.setdefault(word, self._db[key][word].keys())
+            aux = data.setdefault(attr, {})
+            for word in self._db[attr].keys():
+                aux.setdefault(word, set(self._db[attr][word].keys()))
         return data
