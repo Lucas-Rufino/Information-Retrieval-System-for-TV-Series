@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados da Busca - Series Onllayne</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/results.css' %}">
+</head>
+<body>
+<div class="container">
+    <h1 id="title">Buscando todos os resultados para {{ name }}</h1>
+
+    <div id="resultContainer">
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Série: The 100</h5>
+                    <small>Temporadas: 5</small>
+                </div>
+                <img src="/static/img/the100.jpg" id="icon">
+                <p class="mb-1">Quando uma guerra nuclear destruiu a civilização e o planeta Terra, os únicos sobreviventes foram 400 pessoas que estavam em 12 estações espaciais em órbita. 97 anos e três gerações depois, a população já contava com 4 mil pessoas, mas os recursos já vão escassos.</p>
+                <br>
+                <small>Elenco: Eliza Taylor, Paige Turco, Thomas McDonell, Eli Goree, <b>Marie Avgeropoulos</b>, Bob Morley, Kelly Hu, Christopher Larkin, Devon Bostick, Isaiah Washington, Henry Ian Cusick, Lindsey Morgan, Ricky Whittle, Richard Harmon, Zach McGowan, Tasya Teles</small>
+                <div id="buttonSpace">
+                    <button class="btn btn-secondary">Saiba mais</button>
+                </div>
+
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Filme: Fugitiva aos 17</h5>
+                    <small class="text-muted">Filme de 2012</small>
+                </div>
+                <p class="mb-1">Uma adolescente hacker suspeita de ter assassinado sua melhor amiga tenta encontrar o verdadeiro culpado.</p>
+                <small class="text-muted">Donec id elit non mi porta.</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">List group item heading</h5>
+                    <small class="text-muted">3 days ago</small>
+                </div>
+                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                <small class="text-muted">Donec id elit non mi porta.</small>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
