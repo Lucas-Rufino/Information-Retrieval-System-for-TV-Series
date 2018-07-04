@@ -13,24 +13,24 @@
 </head>
 <body>
 <div id="searchArea">
-    <h1 id="title">Que série você deseja obter informação?</h1>
+    <h1 id="title">Which series do you want to get information about?</h1>
     <div class="input-group mb-3" id="search">
-        <input type="text" class="form-control" placeholder="General" aria-label="Nome da série" aria-describedby="basic-addon2">
+        <input type="text" id ="general_input" class="form-control" placeholder="General" aria-label="Nome da série" aria-describedby="basic-addon2">
     </div>
     <div class="input-group mb-3" id="search">
-            <input type="text" class="form-control" placeholder="Title" aria-label="Nome da série" aria-describedby="basic-addon2">
-            <input type="text" class="form-control" placeholder="Cast" aria-label="Nome da série" aria-describedby="basic-addon2">
+            <input type="text" id = "title_input" class="form-control" placeholder="Title" aria-label="Nome da série" aria-describedby="basic-addon2">
+            <input type="text" id ="cast_input" class="form-control" placeholder="Cast" aria-label="Nome da série" aria-describedby="basic-addon2">
     </div>
     <div class="input-group mb-3" id="search">
-            <input type="text" class="form-control" placeholder="Resume" aria-label="Nome da série" aria-describedby="basic-addon2">
-            <ul class ="genre-select" id="genre" multiple="multiple">
-                    <div class="input-group button-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Genres<span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        {%for i in genres %}
-                            <li><a href="#" class="small" data-value={{i}} tabIndex="-1"><input type="checkbox"/>&nbsp;{{i}}</a></li>
-                        {% endfor %}
-                </ul>    
+        <input type="text" id = "resume_input" class="form-control" placeholder="Resume" aria-label="Nome da série" aria-describedby="basic-addon2">
+        <ul class ="genre-select" id="genre" multiple="multiple">
+                <div class="input-group button-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Genres<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    {%for i in genres %}
+                        <li><a href="#" class="small" data-value={{i}} tabIndex="-1"><input type="checkbox"/>&nbsp;{{i}}</a></li>
+                    {% endfor %}
+        </ul>    
     </div>
     <br>
     <button class="btn btn-danger" type="button">Buscar</button>
