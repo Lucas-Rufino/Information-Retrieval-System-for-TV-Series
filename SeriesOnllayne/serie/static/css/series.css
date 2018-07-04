@@ -1,0 +1,21 @@
+#title{
+    text-align: center;
+    margin-top: 25%;
+    color: #ffffff;
+    text-shadow: 4px 4px 4px #000000;
+}
+#searchArea{
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 20%;
+}
+#search{
+    margin-top: 2%;
+}
+body{
+    background-image: url('/static/img/bg.jpg');
+}
+#category{
+    border: none;
+}
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="br">
+<head>
+    <meta charset="UTF-8">
+    <title>Séries Onllayne</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/series.css' %}">
+    <script src = "{% static 'js/selection.js'%}"></script>
+</head>
+<body>
+<div id="searchArea">
+    <h1 id="title">Which series do you want to get information about?</h1>
+    <div class="input-group mb-3" id="search">
+        <input type="text" id ="general_input" class="form-control" placeholder="General" aria-label="Nome da série" aria-describedby="basic-addon2">
+    </div>
+    <div class="input-group mb-3" id="search">
+            <input type="text" id = "title_input" class="form-control" placeholder="Title" aria-label="Nome da série" aria-describedby="basic-addon2">
+            <input type="text" id ="cast_input" class="form-control" placeholder="Cast" aria-label="Nome da série" aria-describedby="basic-addon2">
+    </div>
+    <div class="input-group mb-3" id="search">
+        <input type="text" id = "resume_input" class="form-control" placeholder="Resume" aria-label="Nome da série" aria-describedby="basic-addon2">
+        <ul class ="genre-select" id="genre" multiple="multiple">
+                <div class="input-group button-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Genres<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    {%for i in genres %}
+                        <li><a href="#" class="small" data-value={{i}} tabIndex="-1"><input type="checkbox"/>&nbsp;{{i}}</a></li>
+                    {% endfor %}
+        </ul>    
+    </div>
+    <br>
+    <button class="btn btn-danger" type="button">Buscar</button>
+    </div>
+</div>
+</body>
+</html>

@@ -21,6 +21,11 @@ def writeToJson(fileName,path, data):
     with open(filepath, 'w') as fp:
         fp.write(js.dumps(data, indent = 2))
 
+def readJson(path):
+    with open(path) as fr:
+        data = js.load(fr)
+    return data
+
 
 def get_link(link):
     r = rq.get(link)
