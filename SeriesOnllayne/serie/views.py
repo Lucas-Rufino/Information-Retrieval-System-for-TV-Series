@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from indexer.index import processor
 import os
 import json
 
@@ -14,14 +15,31 @@ def search_query(request):
     cast_query = None
     genre_query = None
     resume_query = None
+    rate_query = None
 
     if request.method == "GET":
         title_query = request.GET.get('title_input', None)
         general_query = request.GET.get('general_input', None)
         cast_query = request.GET.get('cast_input', None)
         resume_query = request.GET.get('resume_input', None)
-     
-        
+        query = {}
+        if title_query != None:
+            query['title'] = processor.text(title_query)
+        if general_query != None:
+            query['all'] = processor.text(general_query)
+        if cast_query != None:
+            query['cast'] = processor.text(cast_query)
+        if resume_query != None:
+            query['resume'] = processor.text(resume_query)
+        if genre_query != None:
+            query['genre'] = processor.text(resume_query)
+        if rate_query != None:
+            query['rate'] = processor.text(resume_query)
+
+    ids_result = "ALGUMA COISA QUE VOU PASSAR A QUERY" 
+            
+
+
 def get_data(id):
     path = "data"
     filename = id
