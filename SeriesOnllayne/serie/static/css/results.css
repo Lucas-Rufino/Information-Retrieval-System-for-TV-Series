@@ -1,0 +1,17 @@
+body{
+    background-color: #c4c6c9;
+}
+#title{
+    text-align: center;
+    margin-top: 5%;
+}
+#resultContainer{
+    padding-top: 5%;
+}
+#icon{
+    float: right;
+}
+#buttonSpace{
+    margin-top: 1%;
+
+}
