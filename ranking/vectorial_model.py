@@ -1,7 +1,7 @@
 import numpy as np
 import math
 
-class Vectorial_Model(object):
+class Vectorial_Model(object): 
     def __init__(self):
         self.a = []
 

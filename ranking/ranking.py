@@ -11,6 +11,8 @@ class Ranking(object):
     def __init__(self, index):
         self.vec_model = vectorial_model.Vectorial_Model()       # Modelo Vetorial utilizado no cosseno
         self.index = index
+        self.zone_score = {'title': 1, 'resume':0.8, 'cast':0.64}
+
     # Build query's vector without tf
     def query_weightless(self, query):
         query = self.build_vec(query)
@@ -21,7 +23,7 @@ class Ranking(object):
     def remove_duplicates (self, query):
         return list(set(query))
 
-    def document_weightless(self, query, document):
+    def document_weightless(self, query, document, zone_score=False):
         query_vec = self.query_weightless(query)
         query = self.build_vec(query)
         rank = []
@@ -30,8 +32,13 @@ class Ranking(object):
             cur_doc = self.remove_duplicates(cur_doc)
             vec = []
             for term in query:
-                if(term in cur_doc): vec.append(1)
-                else: vec.append(0)
+                if not zone_score:
+                    if(term in cur_doc): vec.append(1)
+                    else: vec.append(0)
+                else:
+                    t = term.split('.')
+                    if term in cur_doc: vec.append(self.zone_score[t[1]])
+                    else: vec.append(0)
             cos = self.vec_model.cossine(vec, query_vec)
             rank.append((doc, cos))
         return rank
@@ -47,15 +54,15 @@ class Ranking(object):
         result = set()
         for att in query:
             for q in query[att]:
+                if att == 'genre' or att == 'rate':
+                    continue
                 if not document or boolean:
                     result.add(q+'.'+att)
                 else:
                     result.add(((q+'.'+att), query[att][q]))
         return list(result)
 
-    def document_weight(self, query, document, BM25=False, b=0.75, k1=1.25):
-        print(BM25)
-        #self.index.load()
+    def document_weight(self, query, document, BM25=False, b=0.75, k1=1.25, zone_score=False):
         result = {}
         rank = []
         idf = {}
@@ -70,12 +77,13 @@ class Ranking(object):
             size_doc = self.index.sizeDoc(doc)
             for term in query:
                 vec = 0
-                #print(term, cur_doc)
-                if(term in cur_doc[0]):
+                has = [True for x in cur_doc if x[0] == term]
+                if(len(has) > 0):
                     q = term.split('.')
-                    vec = document[doc][q[1]][q[0]]
+                    if not zone_score:
+                        vec = document[doc][q[1]][q[0]]
+                    else: vec = vec*self.zone_score[q[1]]
                     if(BM25):
-                        #print('llalallallala')
                         num = vec*(k1 + 1)
                         freq = b*size_doc/mean_docs
                         den = vec + k1*(1-b + freq)
@@ -101,8 +109,8 @@ class Ranking(object):
                 r.append(tfidf)
             cos = self.vec_model.cossine(r, query_vec)
             rank.append((int(x), cos))
-        #print(rank)
-        return rank
+        return rank #list of index
+
 
     def all_pairs (self, rank):
         a = set()
@@ -148,11 +156,11 @@ class Ranking(object):
 # '57': {'resume': {'doctor': 1}}, '155': {'resume': {'doctor': 1}}, '386': {'resume': {'doctor': 1}},
 # '305': {'resume': {'doctor': 1}}, '111': {'resume': {'doctor': 1}}, '52': {'resume': {'doctor': 1}},
 # '55': {'resume': {'doctor': 2}}}
-
-#document = ['valdmeiro e muito falso porque ele e muito falso']
-#a = r.query_weightless(query)
-#a = r.query_weight(query)
-#a = r.build_vec(doc_frec['67'], document=True, boolean=False)S
-#b = r.document_weight_BM25(query, doc_frec)
+#
+# #document = ['valdmeiro e muito falso porque ele e muito falso']
+# #a = r.query_weightless(query)
+# #a = r.query_weight(query)
+# #a = r.build_vec(doc_frec['67'], document=True, boolean=False)
+# #b = r.document_weight_BM25(query, doc_frec)
 # c = r.document_weightless(query, inverted_file)
-#print(c)
+# #print(c)

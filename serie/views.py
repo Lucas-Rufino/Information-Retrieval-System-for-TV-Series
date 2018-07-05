@@ -41,10 +41,11 @@ def results_page(request):
         if genre_query != None and genre_query != "":
             query['genre'] = genre_query
         if rate_query != None and rate_query != "":
-            query['rate'] = processor.number(rate_query)
+            query['rate'] = processor.number(int(rate_query))
+            print(query['rate'])
+
 
     data = _iFile.search(query)
-    print(query)
     ids_result = _rank.rank(query, data)
     return render(request, 'series/results.html', {'datas': get_response(ids_result)})
 
@@ -52,7 +53,6 @@ def get_data(id):
     path = os.path.abspath(os.path.dirname(__file__))
     filename = str(id)+".json"
     fullpath = os.path.join(path, "../database/"+filename)
-    print(fullpath)
     with open(fullpath) as json_data:
         d = json.load(json_data)
         return d

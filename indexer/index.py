@@ -136,12 +136,13 @@ class Frequency(Inverted):
     def filterBy(self, attr, by):
         filter = set()
         aux = self._db.get(attr, None)
-        print(aux)
         if aux is not None:
             for word in by.get(attr, []):
                 aux2 = aux.get(word, None)
+                print(word)
                 if aux2 is not None:
                     for id in aux2.keys():
+
                         filter.add(id)
         return filter
 
