@@ -8,6 +8,7 @@ class Serie(models.Model):
     link = models.TextField()
     rate = models.TextField()
     genre = models.TextField()
+    cast = models.TextField()
 
 
   

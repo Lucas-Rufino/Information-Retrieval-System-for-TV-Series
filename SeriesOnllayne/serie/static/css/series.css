@@ -1,13 +1,13 @@
 #title{
     text-align: center;
-    margin-top: 25%;
+    margin-top: 20%;
     color: #ffffff;
     text-shadow: 4px 4px 4px #000000;
 }
 #searchArea{
     margin-left: 20%;
     margin-right: 20%;
-    margin-top: 20%;
+    margin-top: 10%;
 }
 #search{
     margin-top: 2%;
@@ -17,5 +17,13 @@ body{
 }
 #category{
     border: none;
+}
+img {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    max-width: 20%;
+    max-height: 20%;
 }
 
