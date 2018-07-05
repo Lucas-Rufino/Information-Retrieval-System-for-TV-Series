@@ -2,6 +2,8 @@ from django.shortcuts import render
 import os
 import json
 from .forms import queryForm
+from indexer import processor
+
 
 def search_page(request):
     genres = ['action', 'adventure', 'animation', 'anime', 'biography', 'comedy', 'crime', 'documentary', 'drama', 'erotic', 'family', 'fantasy', 'fiction', 'gameshow', 'history', 'homeandgarden', 'horror', 'kids', 'movie', 'music', 'musical', 'mystery', 'news', 'politics', 'reality', 'romance', 'scifi', 'soap', 'specialinterest', 'sport', 'superhero', 'suspense', 'talkshow', 'thriller', 'war', 'western']
@@ -36,8 +38,8 @@ def results_page(request):
         if rate_query != None and rate_query != "":
             query['rate'] = rate_query
     print(query)
-    ids_result = "ALGUMA COISA QUE VOU PASSAR A QUERY" 
-    return render(request, 'series/results.html', {'datas': get_response([1,576])})          
+    ids_result = "ALGUMA COISA QUE VOU PASSAR A QUERY"
+    return render(request, 'series/results.html', {'datas': get_response([1,576])})
 
 def get_data(id):
     path = os.path.abspath(os.path.dirname(__file__))
@@ -55,7 +57,3 @@ def get_response(ids):
         data.update({'id': id})
         result.append(data)
     return result
-
-
-        
-

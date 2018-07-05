@@ -4,8 +4,9 @@ from indexer import processor
 import json
 import os
 
-iFile = index.Basic() #Basic() ou Positional()
+iFile = index.Frequency() #Basic() ou Positional()
 iFile.load()
+print(iFile.search({'all':['met', 'mother', 'how']}))
 # iFile.save(mode='bytecode', serialize=True)
 # print(iFile.search({'resume':['event', 'world','friendship']}))
 
