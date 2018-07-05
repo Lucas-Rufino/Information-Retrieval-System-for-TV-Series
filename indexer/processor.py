@@ -1,6 +1,15 @@
 from nltk.stem.porter import PorterStemmer
 from nltk.corpus import stopwords
 stopwords.words('english')
+try:
+    from nltk.corpus import stopwords
+    stopwords.words('english')
+except Exception:
+    import nltk
+    nltk.download('wordnet')
+    nltk.download('stopwords')
+    from nltk.corpus import stopwords
+    stopwords.words('english')
 import math, re
 
 # import nltk

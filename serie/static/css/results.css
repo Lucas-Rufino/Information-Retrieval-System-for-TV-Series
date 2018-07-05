@@ -1,10 +1,18 @@
 body{
+<<<<<<< HEAD
     background-image: url('/static/img/bg.jpg') no-repeat center center fixed; 
+=======
+    background-image: url('/static/img/bg.jpg');
+    repeat center center fixed;
+>>>>>>> 85fbbdae7a8bc897147abebcbc07da8b504f8df8
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+<<<<<<< HEAD
   
+=======
+>>>>>>> 85fbbdae7a8bc897147abebcbc07da8b504f8df8
 }
 #title{
     text-align: center;
@@ -26,4 +34,5 @@ img {
     transform: translateX(-50%) translateY(-50%);
     max-width: 20%;
     max-height: 20%;
+    padding-bottom: 70px 
 }
