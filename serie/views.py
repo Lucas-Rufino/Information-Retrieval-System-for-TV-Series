@@ -42,7 +42,6 @@ def results_page(request):
             query['genre'] = genre_query
         if rate_query != None and rate_query != "":
             query['rate'] = processor.number(int(rate_query))
-            print(query['rate'])
 
 
     data = _iFile.search(query)

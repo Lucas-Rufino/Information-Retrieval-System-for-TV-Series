@@ -139,7 +139,6 @@ class Frequency(Inverted):
         if aux is not None:
             for word in by.get(attr, []):
                 aux2 = aux.get(word, None)
-                print(word)
                 if aux2 is not None:
                     for id in aux2.keys():
 
