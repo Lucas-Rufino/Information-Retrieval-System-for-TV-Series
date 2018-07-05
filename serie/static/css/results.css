@@ -1,5 +1,10 @@
 body{
     background-image: url('/static/img/bg.jpg');
+    repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 #title{
     text-align: center;
@@ -21,4 +26,5 @@ img {
     transform: translateX(-50%) translateY(-50%);
     max-width: 20%;
     max-height: 20%;
+    padding-bottom: 70px 
 }
