@@ -41,8 +41,8 @@ class Inverted(object):
     def covertAll(self, by):
         all = by.get('all', None)
         if all is not None:
-            by = { attr:all for attr in self._attrs }
-        return by
+            for key in ['title', 'resume', 'cast']:
+                by[key] = all
 
     def meanDocs(self):
         mean = (sum(self._size.values()))/float(len(self._size))
@@ -75,7 +75,18 @@ class Basic(Inverted):
 
     def search(self, by):
         result = {}
-        by = self.covertAll(by)
+        self.covertAll(by)
+        for attr in by.keys():
+            if attr in self._attrs:
+                aux = self._db.get(attr, None)
+                if aux is not None:
+                    for word in by[attr]:
+                        aux2 = aux.get(word, None)
+                        if aux2 is not None:
+                            for id in aux2:
+                                i = result.setdefault(id, {})
+                                i = i.setdefault(attr, [])
+                                i.append(word)
         for attr in by.keys():
             if attr in self._attrs:
                 aux = self._db.get(attr, None)
@@ -114,7 +125,7 @@ class Frequency(Inverted):
 
     def search(self, by):
         result = {}
-        by = self.covertAll(by)
+        self.covertAll(by)
         for attr in by.keys():
             if attr in self._attrs:
                 aux = self._db.get(attr, None)
@@ -153,7 +164,7 @@ class Positional(Inverted):
 
     def search(self, by):
         result = {}
-        by = self.covertAll(by)
+        self.covertAll(by)
         for attr in by.keys():
             if attr in self._attrs:
                 aux = self._db.get(attr, None)

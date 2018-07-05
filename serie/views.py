@@ -42,8 +42,9 @@ def results_page(request):
             query['genre'] = genre_query
         if rate_query != None and rate_query != "":
             query['rate'] = processor.number(rate_query)
-    print(query)
+
     data = _iFile.search(query)
+    print(query)
     ids_result = _rank.rank(query, data)
     return render(request, 'series/results.html', {'datas': get_response(ids_result)})
 
