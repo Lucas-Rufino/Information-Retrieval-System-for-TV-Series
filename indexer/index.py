@@ -55,6 +55,9 @@ class Inverted(object):
     def numDocs(self):
         return len(self._size.values())
 
+    def sizeDoc(self, id):
+        return self._size[id]
+
 class Basic(Inverted):
     def __init__(self):
         super().__init__("basic/")

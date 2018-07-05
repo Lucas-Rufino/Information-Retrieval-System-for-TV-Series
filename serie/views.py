@@ -3,7 +3,12 @@ import os
 import json
 from .forms import queryForm
 from indexer import processor
+from indexer import index
+from ranking.ranking import Ranking
 
+_iFile = index.Frequency()
+_iFile.load()
+_rank = Ranking(_iFile)
 
 def search_page(request):
     genres = ['action', 'adventure', 'animation', 'anime', 'biography', 'comedy', 'crime', 'documentary', 'drama', 'erotic', 'family', 'fantasy', 'fiction', 'gameshow', 'history', 'homeandgarden', 'horror', 'kids', 'movie', 'music', 'musical', 'mystery', 'news', 'politics', 'reality', 'romance', 'scifi', 'soap', 'specialinterest', 'sport', 'superhero', 'suspense', 'talkshow', 'thriller', 'war', 'western']
@@ -26,25 +31,26 @@ def results_page(request):
         rate_query = request.POST.get('rate')
         query = {}
         if title_query != None and title_query != "":
-            query['title'] = title_query
+            query['title'] = processor.text(title_query)
         if general_query != None and general_query != "":
-            query['all'] = general_query
+            query['all'] = processor.text(general_query)
         if cast_query != None and cast_query != "":
-            query['cast'] = cast_query
+            query['cast'] = processor.text(cast_query)
         if resume_query != None and resume_query != "":
-            query['resume'] = resume_query
+            query['resume'] = processor.text(resume_query)
         if genre_query != None and genre_query != "":
             query['genre'] = genre_query
         if rate_query != None and rate_query != "":
-            query['rate'] = rate_query
+            query['rate'] = processor.number(rate_query)
     print(query)
-    ids_result = "ALGUMA COISA QUE VOU PASSAR A QUERY"
-    return render(request, 'series/results.html', {'datas': get_response([1,576])})
+    data = _iFile.search(query)
+    ids_result = _rank.rank(query, data)
+    return render(request, 'series/results.html', {'datas': get_response(ids_result)})
 
 def get_data(id):
     path = os.path.abspath(os.path.dirname(__file__))
     filename = str(id)+".json"
-    fullpath = os.path.join(path, "../../database/"+filename)
+    fullpath = os.path.join(path, "../database/"+filename)
     print(fullpath)
     with open(fullpath) as json_data:
         d = json.load(json_data)
