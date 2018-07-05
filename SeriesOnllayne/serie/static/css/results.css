@@ -1,17 +1,24 @@
 body{
-    background-color: #c4c6c9;
+    background-image: url('/static/img/bg.jpg');
 }
 #title{
     text-align: center;
-    margin-top: 5%;
+    margin-top: 15%;
+    color: #ffffff;
+    text-shadow: 4px 4px 4px #000000;
 }
 #resultContainer{
     padding-top: 5%;
 }
-#icon{
-    float: right;
-}
 #buttonSpace{
     margin-top: 1%;
 
+}
+img {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    max-width: 20%;
+    max-height: 20%;
 }
