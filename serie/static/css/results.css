@@ -1,22 +1,19 @@
 body{
-<<<<<<< HEAD
-    background-image: url('/static/img/bg.jpg') no-repeat center center fixed; 
-=======
     background-image: url('/static/img/bg.jpg');
-    repeat center center fixed;
->>>>>>> 85fbbdae7a8bc897147abebcbc07da8b504f8df8
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    min-height: 500px;
+    /* Set background image to fixed (don't scroll along with the page) */
+    background-attachment: fixed;
+    /* Center the background image */
+    background-position: center;
+    /* Set the background image to no repeat */
+    background-repeat: no-repeat;
+    /* Scale the background image to be as large as possible */
     background-size: cover;
-<<<<<<< HEAD
   
-=======
->>>>>>> 85fbbdae7a8bc897147abebcbc07da8b504f8df8
 }
 #title{
     text-align: center;
-    margin-top: 15%;
+    margin-top: 10%;
     color: #ffffff;
     text-shadow: 4px 4px 4px #000000;
 }

@@ -1,6 +1,4 @@
 from nltk.stem.porter import PorterStemmer
-from nltk.corpus import stopwords
-stopwords.words('english')
 try:
     from nltk.corpus import stopwords
     stopwords.words('english')
@@ -11,10 +9,6 @@ except Exception:
     from nltk.corpus import stopwords
     stopwords.words('english')
 import math, re
-
-# import nltk
-# nltk.download('wordnet')
-# nltk.download('stopwords')
 
 def tokenize(data):
     return data.split()

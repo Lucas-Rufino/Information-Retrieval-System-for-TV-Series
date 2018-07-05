@@ -4,6 +4,13 @@
     color: #ffffff;
     text-shadow: 4px 4px 4px #000000;
 }
+#contributor{
+    text-align: center;
+    margin-top: 1%;
+    color: #ffffff;
+    text-shadow: 4px 4px 4px #000000;
+    font-size: 20px;
+}
 #searchArea{
     margin-left: 20%;
     margin-right: 20%;
@@ -14,6 +21,15 @@
 }
 body{
     background-image: url('/static/img/bg.jpg');
+    min-height: 500px;
+    /* Set background image to fixed (don't scroll along with the page) */
+    background-attachment: fixed;
+    /* Center the background image */
+    background-position: center;
+    /* Set the background image to no repeat */
+    background-repeat: no-repeat;
+    /* Scale the background image to be as large as possible */
+    background-size: cover;
 }
 #category{
     border: none;
