@@ -4,7 +4,7 @@ import json
 
 class Inverted(object):
     def __init__(self, local):
-        self._attrs = set(['title', 'genre', 'rate', 'resume', 'cast'])
+        self._attrs = set(['title', 'resume', 'cast'])
         self._local = local
         self._size = {}
         self._db = {}
@@ -41,7 +41,7 @@ class Inverted(object):
     def covertAll(self, by):
         all = by.get('all', None)
         if all is not None:
-            for key in ['title', 'resume', 'cast']:
+            for key in self._attrs:
                 by[key] = all
 
     def meanDocs(self):
@@ -73,9 +73,29 @@ class Basic(Inverted):
             if id not in aux:
                 aux.append(id)
 
+    def filterBy(self, attr, by):
+        filter = set()
+        aux = self._db.get(attr, None)
+        if aux is not None:
+            for word in by.get(attr, []):
+                aux2 = aux.get(word, None)
+                if aux2 is not None:
+                    for id in aux2:
+                        filter.add(id)
+        return filter
+
     def search(self, by):
         result = {}
         self.covertAll(by)
+        fGenre = self.filterBy('genre', by)
+        fRate = self.filterBy('rate', by)
+        filter = set()
+        if len(fGenre) > 0 and len(fRate) > 0:
+            filter = fGenre.intersection(fRate)
+        elif len(fGenre) > 0:
+            filter = fGenre
+        elif len(fRate) > 0:
+            filter = fRate
         for attr in by.keys():
             if attr in self._attrs:
                 aux = self._db.get(attr, None)
@@ -84,20 +104,10 @@ class Basic(Inverted):
                         aux2 = aux.get(word, None)
                         if aux2 is not None:
                             for id in aux2:
-                                i = result.setdefault(id, {})
-                                i = i.setdefault(attr, [])
-                                i.append(word)
-        for attr in by.keys():
-            if attr in self._attrs:
-                aux = self._db.get(attr, None)
-                if aux is not None:
-                    for word in by[attr]:
-                        aux2 = aux.get(word, None)
-                        if aux2 is not None:
-                            for id in aux2:
-                                i = result.setdefault(id, {})
-                                i = i.setdefault(attr, [])
-                                i.append(word)
+                                if len(filter) == 0 or id in filter:
+                                    i = result.setdefault(id, {})
+                                    i = i.setdefault(attr, [])
+                                    i.append(word)
         return result
 
     def ocorrences(self):
@@ -123,9 +133,30 @@ class Frequency(Inverted):
             self._size[id] += 1
             aux[id] += 1
 
+    def filterBy(self, attr, by):
+        filter = set()
+        aux = self._db.get(attr, None)
+        print(aux)
+        if aux is not None:
+            for word in by.get(attr, []):
+                aux2 = aux.get(word, None)
+                if aux2 is not None:
+                    for id in aux2.keys():
+                        filter.add(id)
+        return filter
+
     def search(self, by):
         result = {}
         self.covertAll(by)
+        fGenre = self.filterBy('genre', by)
+        fRate = self.filterBy('rate', by)
+        filter = set()
+        if len(fGenre) > 0 and len(fRate) > 0:
+            filter = fGenre.intersection(fRate)
+        elif len(fGenre) > 0:
+            filter = fGenre
+        elif len(fRate) > 0:
+            filter = fRate
         for attr in by.keys():
             if attr in self._attrs:
                 aux = self._db.get(attr, None)
@@ -134,9 +165,10 @@ class Frequency(Inverted):
                         aux2 = aux.get(word, None)
                         if aux2 is not None:
                             for id in aux2.keys():
-                                i = result.setdefault(id, {})
-                                i = i.setdefault(attr, {})
-                                i.setdefault(word, aux2[id])
+                                if len(filter) == 0 or id in filter:
+                                    i = result.setdefault(id, {})
+                                    i = i.setdefault(attr, {})
+                                    i.setdefault(word, aux2[id])
         return result
 
     def ocorrences(self):
@@ -162,9 +194,29 @@ class Positional(Inverted):
             self._size[id] += 1
             aux.append(i)
 
+    def filterBy(self, attr, by):
+        filter = set()
+        aux = self._db.get(attr, None)
+        if aux is not None:
+            for word in by.get(attr, []):
+                aux2 = aux.get(word, None)
+                if aux2 is not None:
+                    for id in aux2.keys():
+                        filter.add(id)
+        return filter
+
     def search(self, by):
         result = {}
         self.covertAll(by)
+        fGenre = self.filterBy('genre', by)
+        fRate = self.filterBy('rate', by)
+        filter = set()
+        if len(fGenre) > 0 and len(fRate) > 0:
+            filter = fGenre.intersection(fRate)
+        elif len(fGenre) > 0:
+            filter = fGenre
+        elif len(fRate) > 0:
+            filter = fRate
         for attr in by.keys():
             if attr in self._attrs:
                 aux = self._db.get(attr, None)
@@ -173,9 +225,10 @@ class Positional(Inverted):
                         aux2 = aux.get(word, None)
                         if aux2 is not None:
                             for id in aux2.keys():
-                                i = result.setdefault(id, {})
-                                i = i.setdefault(attr, {})
-                                i.setdefault(word, aux2[id])
+                                if len(filter) == 0 or id in filter:
+                                    i = result.setdefault(id, {})
+                                    i = i.setdefault(attr, {})
+                                    i.setdefault(word, aux2[id])
         return result
 
     def ocorrences(self):
