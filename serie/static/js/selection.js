@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $(".js-example-placeholder-multiple").select2({
-        placeholder: "Genres"
+        placeholder: "Genres - ex: history, gameshow, music"
     });
 });
 function isNumberKey(evt){
