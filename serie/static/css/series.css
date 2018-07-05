@@ -26,4 +26,9 @@ img {
     max-width: 20%;
     max-height: 20%;
 }
+.btn-primary-outline {
+    background-color: transparent;
+    border-color: #ccc;
+
+  }
 
