@@ -5,15 +5,16 @@ from .forms import queryForm
 from indexer import processor
 from indexer import index
 from ranking.ranking import Ranking
+from django.http import HttpResponseRedirect
 
 _iFile = index.Frequency()
 _iFile.load()
 _rank = Ranking(_iFile)
-
+genres = ['action', 'adventure', 'animation', 'anime', 'biography', 'comedy', 'crime', 'documentary', 'drama', 'erotic', 'family', 'fantasy', 'fiction', 'gameshow', 'history', 'homeandgarden', 'horror', 'kids', 'movie', 'music', 'musical', 'mystery', 'news', 'politics', 'reality', 'romance', 'scifi', 'soap', 'specialinterest', 'sport', 'superhero', 'suspense', 'talkshow', 'thriller', 'war', 'western']
 def search_page(request):
-    genres = ['action', 'adventure', 'animation', 'anime', 'biography', 'comedy', 'crime', 'documentary', 'drama', 'erotic', 'family', 'fantasy', 'fiction', 'gameshow', 'history', 'homeandgarden', 'horror', 'kids', 'movie', 'music', 'musical', 'mystery', 'news', 'politics', 'reality', 'romance', 'scifi', 'soap', 'specialinterest', 'sport', 'superhero', 'suspense', 'talkshow', 'thriller', 'war', 'western']
     return render(request, 'series/search.html', {'genres': genres})
-
+def aboutus_page(request):
+    return render(request, 'series/aboutus.html')
 def results_page(request):
     title_query = None
     general_query = None
@@ -41,12 +42,13 @@ def results_page(request):
         if genre_query != None and genre_query != "":
             query['genre'] = genre_query
         if rate_query != None and rate_query != "":
-            query['rate'] = processor.number(int(rate_query))
-
-
-    data = _iFile.search(query)
-    ids_result = _rank.rank(query, data)
-    return render(request, 'series/results.html', {'datas': get_response(ids_result)})
+            query['rate'] = processor.number(rate_query)
+    if query is None:
+        return HttpResponseRedirect("/")
+    else:
+        data = _iFile.search(query)
+        ids_result = _rank.rank(query, data)
+        return render(request, 'series/results.html', {'datas': get_response(ids_result)})
 
 def get_data(id):
     path = os.path.abspath(os.path.dirname(__file__))

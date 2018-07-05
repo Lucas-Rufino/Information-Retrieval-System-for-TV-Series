@@ -14,6 +14,13 @@
     <script src = "{% static 'js/selection.js'%}"></script>
 </head>
 <body>
+<div class="container3">
+        <div class="btn-group ">
+            <a href="/aboutus">
+                <button type="button" class="btn btn-primary-outline">ABOUT US</button>
+            </a>
+        </div>
+    </div>
     <div id="logo"><img src="/static/img/logo.png"></div>
     <div id="searchArea">
         <h1 id="title">Which series do you want to get information about?</h1>
@@ -21,14 +28,14 @@
         {% csrf_token %}
     
         <div class="input-group mb-3" id="search">
-            <input type="text" name = "general" id ="general_input" class="form-control" placeholder="General" aria-label="Nome da série" aria-describedby="basic-addon2">
+            <input type="text" name = "general" id ="general_input" class="form-control" placeholder="General">
         </div>
         <div class="input-group mb-3" id="search">
-                <input type="text" name= "title" id = "title_input" class="form-control" placeholder="Title" aria-label="Nome da série" aria-describedby="basic-addon2">
-                <input type="text" name = "cast" id ="cast_input" class="form-control" placeholder="Cast" aria-label="Nome da série" aria-describedby="basic-addon2">
+                <input type="text" name= "title" id = "title_input" class="form-control" placeholder="Title - ex: game, american, love" >
+                <input type="text" name = "cast" id ="cast_input" class="form-control" placeholder="Cast - ex: David, Anna, Daniel">
         </div>
         <div class="input-group mb-3" id="search">
-            <input type="text" name ="resume" id = "resume_input" class="form-control" placeholder="Resume" aria-label="Nome da série" aria-describedby="basic-addon2">
+            <input type="text" name ="resume" id = "resume_input" class="form-control" placeholder="Resume - ex: appear, american, channel">
         </div>
         <div class="input-group mb-3" id="search">
             <select class="js-example-placeholder-multiple js-states form-control multiple" name="genre" style="width: 75%" multiple="multiple">
@@ -36,7 +43,7 @@
                     <option value={{i}}>{{i}}</option>
                 {%endfor%}
             </select>
-            <input type="text" name ="rate" id = "rate_input" class="form-control" placeholder="Rate" aria-label="Nome da série" aria-describedby="basic-addon2">
+            <input type="number" name ="rate" id = "rate_input" class="form-control" placeholder="Rate" aria-label="Nome da série" aria-describedby="basic-addon2" onkeypress="return isNumberKey(event)">
         </div>
         <br>
         <button class="btn btn-danger" type="submit">Buscar</button>

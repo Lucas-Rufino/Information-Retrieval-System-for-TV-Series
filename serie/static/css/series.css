@@ -26,4 +26,10 @@ img {
     max-width: 20%;
     max-height: 20%;
 }
+.btn-primary-outline {
+    background-color: transparent;
+    color: #ffffff;
+    padding-top: 10px;
+
+  }
 

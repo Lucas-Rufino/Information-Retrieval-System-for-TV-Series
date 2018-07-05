@@ -45,17 +45,18 @@ def wordsOrder(data, attr):
     return sorted(order, reverse=True)
 
 getUnique()
-for attr in ['genre', 'cast', 'title']:
+print('ok UNIQUE')
+for attr in ['resume']:
     getMutual(attr)
+    print('ok MUTUAL')
     data = mutualInformation(attr)
     order = wordsOrder(data, attr)
     keys = sorted(list(data.keys()))
     data = sorted([(data[key], max(_unique[attr][key[0]],_unique[attr][key[1]]), key) for key in keys], reverse=True)
-    with open(attr + '.txt', 'a') as fl:
-        fl.write(attr + ' - - - - - - - - - - -\n')
-        fl.write('\ntuplas com maiores MI:\n')
-        for d in data[:100]:
-            fl.write('\t' + str(d) + '\n')
-        fl.write('\npalavras com maiores MI:\,')
-        for o in order[:100]:
-            fl.write('\t' + str(o) + '\n')
+    print(attr, '- - - - - - - - - - -')
+    print('\ntuplas com maiores MI:')
+    for d in data[:100]:
+        print('/t', d)
+    print('\npalavras com maiores MI:')
+    for o in order[:100]:
+        print('/t', o)
